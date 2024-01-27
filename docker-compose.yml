@@ -1,0 +1,27 @@
+services:
+  nestjs-prisma-app-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '4000:3001' # host:container
+    volumes:
+      - ./src:/usr/src/app/src # host:container
+      # - /app/node_modules # container
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    depends_on:
+      - nestjs-prisma-app-db
+
+  nestjs-prisma-app-db:
+    image: mysql
+    ports:
+      - '3307:3307' # host:container
+    restart: always
+    environment:
+      MYSQL_DATABASE: nestjs-prisma-app
+      MYSQL_ROOT_PASSWORD: root_password_123456
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: test_password_123456
+      MYSQL_TCP_PORT: 3307

@@ -1,0 +1,15 @@
+services:
+  nestjs-prisma-app-prod-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '4001:3001' # host:container
+    volumes:
+      - ./src:/usr/src/app/src # host:container
+      # - /app/node_modules # container
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    # depends_on:
+    #   - nestjs-prisma-app-db
