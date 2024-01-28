@@ -18,3 +18,5 @@ prod .` to create the production image
 `sudo docker-compose -f docker-compose.prod.yml up --build`
 
 `sudo docker-compose -f docker-compose.prod.yml up --build -d` to create the production images and containers, here the containers will be detached from the terminal
+
+3. After install prisma, and run `npx prisma init` and re-run `sudo docker-compose up --build` to create prisma.schema file. Then you can run `npx prisma studio` to see the database and the tables. At last, we need to run `npx prisma migrate dev --name init_db` to generate the 'migration.sql', and then run `npx prisma generate` or `npx prisma db push` on the docker api terminal to create the tables in the database.

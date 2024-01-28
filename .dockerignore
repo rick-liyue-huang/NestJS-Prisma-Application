@@ -5,3 +5,4 @@ test
 .git
 .prettierrc
 Dockerfile
+# .env
