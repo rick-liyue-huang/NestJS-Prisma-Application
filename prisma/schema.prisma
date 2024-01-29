@@ -12,19 +12,43 @@ datasource db {
 }
 
 model User {
-  id          Int     @id @default(autoincrement())
-  username    String  @unique
-  displayName String? @default("")
+  id          Int                @id @default(autoincrement())
+  username    String             @unique
+  displayName String?            @default("")
+  userSetting UserSetting?
+  posts       Post[]
+  groupPosts  UserOnGroupPosts[]
 }
 
 model UserSetting {
   id              Int     @id @default(autoincrement())
   notificationsOn Boolean @default(true)
   smsEnabled      Boolean @default(false)
+  user            User    @relation(fields: [userId], references: [id])
+  userId          Int     @unique
 }
 
 model Post {
   id          Int    @id @default(autoincrement())
   title       String
   description String
+  author      User   @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model GroupPost {
+  id          Int                @id @default(autoincrement())
+  title       String
+  description String
+  users       UserOnGroupPosts[]
+}
+
+// Junction table
+model UserOnGroupPosts {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  groupPost   GroupPost @relation(fields: [groupPostId], references: [id])
+  groupPostId Int
+
+  @@id([userId, groupPostId])
 }

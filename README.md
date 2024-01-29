@@ -20,3 +20,7 @@ prod .` to create the production image
 `sudo docker-compose -f docker-compose.prod.yml up --build -d` to create the production images and containers, here the containers will be detached from the terminal
 
 3. After install prisma, and run `npx prisma init` and re-run `sudo docker-compose up --build` to create prisma.schema file. Then you can run `npx prisma studio` to see the database and the tables. At last, we need to run `npx prisma migrate dev --name init_db` to generate the 'migration.sql', and then run `npx prisma generate` or `npx prisma db push` on the docker api terminal to create the tables in the database.
+
+4. And then, we can enter the docker container runtime and interact with the application, by running the following command: `docker exec -it <container> bash`, and then run `apt-get update` `apt-get install vim`
+
+5. When project uses Prisma and connect it with mysql in docker, we need run `npx prisma init` and `npx prisma generate` tot create the local PrismaClient, and then run `npx prisma migrate dev --name xxx` and `npx prisma db push` in the docker api terminal to create the tables in the database. And then we can run `npx prisma studio` to see the database and the tables.

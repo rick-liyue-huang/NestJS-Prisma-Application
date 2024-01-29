@@ -6,7 +6,7 @@ services:
     ports:
       - '4000:3001' # host:container
     volumes:
-      - ./src:/usr/src/app/src # host:container
+      - ./:/usr/src/app/ # host:container
       # - /app/node_modules # container
     # environment:
     #   - NODE_ENV=development
