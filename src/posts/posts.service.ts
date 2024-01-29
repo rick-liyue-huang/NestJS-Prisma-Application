@@ -28,4 +28,16 @@ export class PostsService {
       },
     });
   }
+
+  async getGroupPosts() {
+    return await this.prismaService.groupPost.findMany({
+      include: {
+        users: {
+          select: {
+            user: true,
+          },
+        },
+      },
+    });
+  }
 }

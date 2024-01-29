@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   UsePipes,
   ValidationPipe,
@@ -23,5 +24,10 @@ export class PostsController {
   @UsePipes(ValidationPipe)
   createGroupPost(@Body() { userIds, ...body }: CreateGroupPostDto) {
     return this.postsService.createGroupPost(userIds, body);
+  }
+
+  @Get('group')
+  async getGroupPosts() {
+    return await this.postsService.getGroupPosts();
   }
 }
